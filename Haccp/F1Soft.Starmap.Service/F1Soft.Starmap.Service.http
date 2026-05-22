@@ -1,0 +1,6 @@
+@F1Soft.Starmap.Service_HostAddress = http://localhost:5094
+
+GET {{F1Soft.Starmap.Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

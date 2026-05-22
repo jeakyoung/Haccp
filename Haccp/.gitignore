@@ -1,0 +1,71 @@
+﻿*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Visual Studio Code
+.vscode
+
+# Rider
+.idea
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+packages/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
+
+# ============================================
+# SECURITY: 민감 정보 포함 파일 - 절대 커밋 금지
+# ============================================
+
+# DB 연결문자열, ID/PW 포함
+appsettings.json
+appsettings.*.json
+!appsettings.template.json
+
+# Firebase 서비스 계정 개인 키
+Keys/
+**/firebase-admin.json
+**/*.serviceaccount.json
+
+# 배포 스크립트 (SSH 비밀번호, GitLab 토큰 포함)
+Pub/
+
+# 환경 변수 파일
+.env
+.env.*
+!.env.example
+
+# Claude Code 로컬 설정
+.claude/
+
+# 인증서 및 개인 키
+*.pfx
+*.pem
+*.p12
+*.key
+secrets.json
+**/secrets.json
