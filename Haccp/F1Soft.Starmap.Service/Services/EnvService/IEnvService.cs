@@ -31,4 +31,22 @@ public interface IEnvService
     /// </summary>
     /// <returns></returns>
     string GetEmpCardUrl();
+
+    /// <summary>
+    /// FTP 계정 가져오기
+    /// </summary>
+    /// <returns></returns>
+    string GetFtpUser();
+
+    /// <summary>
+    /// FTP 비밀번호 가져오기
+    /// </summary>
+    /// <returns></returns>
+    string GetFtpPassword();
+
+    /// <summary>
+    /// 원료 이미지 HTTPS 베이스 URL 가져오기
+    /// </summary>
+    /// <returns></returns>
+    string GetMaterialImageHttpsBaseUrl();
 }

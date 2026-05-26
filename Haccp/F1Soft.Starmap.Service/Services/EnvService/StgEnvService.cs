@@ -1,4 +1,4 @@
-﻿namespace F1Soft.Starmap.Service.Services.EnvService;
+namespace F1Soft.Starmap.Service.Services.EnvService;
 /// <summary>
 /// 운영 전 환경 서비스
 /// </summary>
@@ -6,7 +6,7 @@ public class StgEnvService : IEnvService
 {
     private readonly IConfiguration _configuration;
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="configuration"></param>
     public StgEnvService(IConfiguration configuration)
@@ -14,7 +14,7 @@ public class StgEnvService : IEnvService
         _configuration = configuration;
     }
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <returns></returns>
     public string GetConnectionString()
@@ -22,7 +22,7 @@ public class StgEnvService : IEnvService
         return _configuration.GetConnectionString($"MsSql{GetEnvironmentName()}Connection") ?? string.Empty;
     }
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <returns></returns>
     public string GetEnvironmentName()
@@ -30,7 +30,7 @@ public class StgEnvService : IEnvService
         return "Stg";
     }
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <returns></returns>
     public string GetFtpUrl()
@@ -51,11 +51,37 @@ public class StgEnvService : IEnvService
     /// 사원 카드 URL 가져오기
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     public string GetEmpCardUrl()
     {
         string empCardUrl = _configuration[$"ConnectionStrings:{GetEnvironmentName()}EmpCardUrl"] ?? string.Empty;
 
         return empCardUrl;
+    }
+
+    /// <summary>
+    /// FTP 계정 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public string GetFtpUser()
+    {
+        return _configuration[$"ConnectionStrings:Ftp{GetEnvironmentName()}User"] ?? string.Empty;
+    }
+
+    /// <summary>
+    /// FTP 비밀번호 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public string GetFtpPassword()
+    {
+        return _configuration[$"ConnectionStrings:Ftp{GetEnvironmentName()}Password"] ?? string.Empty;
+    }
+
+    /// <summary>
+    /// 원료 이미지 HTTPS 베이스 URL 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public string GetMaterialImageHttpsBaseUrl()
+    {
+        return _configuration[$"ConnectionStrings:Ftp{GetEnvironmentName()}MaterialImageHttpsUrl"] ?? string.Empty;
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Configuration;
+using System.Configuration;
 
 namespace F1Soft.Starmap.Service.Services.EnvService;
 
@@ -10,7 +10,7 @@ public class DevEnvService : IEnvService
     private readonly IConfiguration _configuration;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="configuration"></param>
     public DevEnvService(IConfiguration configuration)
@@ -37,7 +37,7 @@ public class DevEnvService : IEnvService
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <returns></returns>
     public string GetFtpUrl()
@@ -60,7 +60,6 @@ public class DevEnvService : IEnvService
     /// 사원 카드 URL 가져오기
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     public string GetEmpCardUrl()
     {
         string empCardUrl = _configuration[$"ConnectionStrings:{GetEnvironmentName()}EmpCardUrl"] ?? string.Empty;
@@ -68,9 +67,30 @@ public class DevEnvService : IEnvService
         return empCardUrl;
     }
 
+    /// <summary>
+    /// FTP 계정 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public string GetFtpUser()
+    {
+        return _configuration[$"ConnectionStrings:Ftp{GetEnvironmentName()}User"] ?? string.Empty;
+    }
 
+    /// <summary>
+    /// FTP 비밀번호 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public string GetFtpPassword()
+    {
+        return _configuration[$"ConnectionStrings:Ftp{GetEnvironmentName()}Password"] ?? string.Empty;
+    }
 
-
-
+    /// <summary>
+    /// 원료 이미지 HTTPS 베이스 URL 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public string GetMaterialImageHttpsBaseUrl()
+    {
+        return _configuration[$"ConnectionStrings:Ftp{GetEnvironmentName()}MaterialImageHttpsUrl"] ?? string.Empty;
+    }
 }
-

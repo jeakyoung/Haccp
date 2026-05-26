@@ -1,50 +1,61 @@
-﻿using F1Soft.Starmap.Service.Services.EnvService;
-using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
-using System.IO;
+using F1Soft.Starmap.Service.Services.EnvService;
 using System.Net;
 
 namespace F1Soft.Starmap.Service.Services.FtpService;
 
 /// <summary>
-/// Ftp Client Service
+/// FTP Client Service
 /// </summary>
 public class FtpService : IFtpService
 {
     private readonly string _ftpUrl;
-    private readonly IEnvService _envService;
-
+    private readonly string _ftpUser;
+    private readonly string _ftpPassword;
 
     /// <summary>
-    /// Ftp Service
+    /// FTP Service
     /// </summary>
     /// <param name="envService"></param>
     public FtpService(IEnvService envService)
     {
-        _envService = envService;
-
-        _ftpUrl = _envService.GetFtpUrl();
+        _ftpUrl = envService.GetFtpUrl();
+        _ftpUser = envService.GetFtpUser();
+        _ftpPassword = envService.GetFtpPassword();
     }
 
-    // Disable the warning.
 #pragma warning disable SYSLIB0014
     /// <summary>
-    /// Ftp의 파일을 Stream형태로 가져옵니다.
+    /// FTP의 파일을 Stream 형태로 가져옵니다.
     /// </summary>
     /// <param name="filePath"></param>
     /// <returns></returns>
     public Stream GetStream(string filePath)
     {
         Uri ftpUri = new Uri(_ftpUrl + filePath);
-        // FTP 서버에서 파일 다운로드
         var ftpRequest = (FtpWebRequest)WebRequest.Create(ftpUri);
         ftpRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-        ftpRequest.Credentials = new NetworkCredential();
+        ftpRequest.Credentials = new NetworkCredential(_ftpUser, _ftpPassword);
         var ftpResponse = (FtpWebResponse)ftpRequest.GetResponse();
-        var ftpStream = ftpResponse.GetResponseStream();
-
-
-        return ftpStream;
+        return ftpResponse.GetResponseStream();
     }
 
+    /// <summary>
+    /// FTP에 파일을 업로드합니다.
+    /// </summary>
+    /// <param name="fileName">저장할 파일명 (예: materialCode.png)</param>
+    /// <param name="stream">업로드할 파일 스트림</param>
+    public async Task UploadAsync(string fileName, Stream stream)
+    {
+        Uri ftpUri = new Uri(_ftpUrl + fileName);
+        var ftpRequest = (FtpWebRequest)WebRequest.Create(ftpUri);
+        ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+        ftpRequest.Credentials = new NetworkCredential(_ftpUser, _ftpPassword);
+        ftpRequest.UseBinary = true;
 
+        using var requestStream = await ftpRequest.GetRequestStreamAsync();
+        await stream.CopyToAsync(requestStream);
+
+        using var response = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+    }
+#pragma warning restore SYSLIB0014
 }

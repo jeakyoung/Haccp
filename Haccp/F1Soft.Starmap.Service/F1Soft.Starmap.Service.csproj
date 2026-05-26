@@ -37,8 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Database\MySQL\" />
-    <Folder Include="Controllers\Groupware\EA\" />
-    <Folder Include="Controllers\Groupware\TPM\" />
   </ItemGroup>
 
 </Project>

@@ -7,14 +7,6 @@ using System.Reflection;
 using F1Soft.Starmap.Service.Controllers.Auth.Models;
 using F1Soft.Starmap.Service.Services.EnvService;
 using F1Soft.Starmap.Service.Services.FtpService;
-using F1Soft.Starmap.Service.Controllers.Groupware.Approval;
-using F1Soft.Starmap.Service.Controllers.Groupware.Calendar;
-using F1Soft.Starmap.Service.Controllers.Groupware.Board;
-using F1Soft.Starmap.Service.Controllers.Setting;
-using F1Soft.Starmap.Service.Controllers.Groupware.Notice;
-using F1Soft.Starmap.Service.Services.Groupware.Notice;
-using F1Soft.Starmap.Service.Services.Groupware.Setting;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -80,12 +72,6 @@ builder.Services.AddScoped<IEnvService, PrdEnvService>();
 builder.Services.AddScoped<TokenService, TokenService>();
 builder.Services.AddScoped<UserManager, UserManager>();
 builder.Services.AddScoped<IFtpService, FtpService>();
-builder.Services.AddScoped<IApprovalService, ApprovalService>();
-builder.Services.AddScoped<ICalendarService, CalendarService>();
-builder.Services.AddScoped<IBoardService, BoardService>();
-builder.Services.AddScoped<IEmpService, EmpService>();
-builder.Services.AddScoped<INoticeService, NoticeService>();
-builder.Services.AddScoped<ISettingService, SettingService>();
 
 
 
